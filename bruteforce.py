@@ -3,34 +3,23 @@ import functions
 import characters
 import time
 
-#Create a fake password to test script
-
-# print("Password to crack")
-# password = input()
-# print("Your password is " + password)
-
-
-# #Ask which hash algorithm you want to use
-# print("What Hash function Do you want to use ?")
-# print("MD5 ?")
-# print("SHA256 ?")
-# hashChoice = input()
+#Ask which hash algorithm you want to use
+print("What Hash function Do you want to use ?")
+print("MD5 ?")
+print("SHA256 ?")
+print("SHA1 ?")
+hashChoice = input()
 
 
-# #Test to know which hash apply to password
-# if hashChoice == "MD5":
-#     hashedPassword = functions.getMD5Hash(password)
-# elif hashChoice == "SHA256":
-#     hashedPassword = functions.getSHA256Hash(password)
-# else:  
-#     print('Error, please enter a correct hash algorithm')
-#     exit
+password = "zizi"
+#Hash Password
+hashedPassword = functions.getHash(hashChoice.lower(), password)
 
-# print("Your hashed password is" + hashedPassword)
+if not hashedPassword:  
+    print('Error, please enter a correct hash algorithm')
+    exit
 
-
-hashpassw = functions.getMD5Hash('azer')
-
+print("Your hashed password is" + hashedPassword)
 
 #Start real BruteForce script
 
@@ -61,7 +50,7 @@ def bruteloop(checkString, level):
             checkString = "".join(checkString)
 
             #Hash test
-            if functions.getMD5Hash(checkString) == hashpassw:
+            if functions.getHash(hashChoice.lower(), checkString) == hashedPassword:
                 print('Password = ' + checkString)
                 isCracked = not isCracked
             else:
